@@ -1,0 +1,4 @@
+slack_notification: 
+  enabled: True #True or False
+  channel: "" # channel name
+  mention: "" # <!subteam^xxxxxxxx>
