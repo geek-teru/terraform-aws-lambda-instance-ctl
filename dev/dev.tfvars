@@ -11,5 +11,5 @@ instance_ctl_lambda_config = {
 instance_ctl_event_config = {
   name    = "instance-ctl-schedule", 
   description = "Invoke lambda function that start and stop instances every hour", 
-  schedule_expression = "cron(* * * * ? *)"
+  schedule_expression = "cron(0 * * * ? *)"
 }
