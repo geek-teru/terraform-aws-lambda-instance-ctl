@@ -1,10 +1,7 @@
-############################
-# modules/securitygroup
-############################
-variable "vpc_id" {
-  type = string
+variable "lambda_vars" {
+  type = map
 }
 
-variable "sg_config" {
-  type = list
+variable "event_rule_arn" {
+  type = string
 }
