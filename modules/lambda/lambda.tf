@@ -13,6 +13,11 @@ resource "aws_lambda_function" "lambda_function" {
 
   filename         = data.archive_file.lambda_package.output_path
   source_code_hash = data.archive_file.lambda_package.output_base64sha256
+
+  logging_config {
+    log_format = "Text"
+    log_group = "/aws/lambda/${var.lambda_vars.function_name}"
+  }
 }
 
 resource "aws_lambda_permission" "lambda_permission" {
@@ -24,4 +29,8 @@ resource "aws_lambda_permission" "lambda_permission" {
 
 output "lambda_function_arn" {
   value = aws_lambda_function.lambda_function.arn
+}
+
+output "lambda_log_group_name" {
+  value = aws_lambda_function.lambda_function.logging_config[0].log_group
 }
