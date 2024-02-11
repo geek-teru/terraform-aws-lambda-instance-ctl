@@ -3,9 +3,14 @@
 * 起動、停止時刻はインスタンスのタグに `start_time` , `stop_time` として指定する。
 * `start_time` , `stop_time` は%H:%Mの%Hのみ。（例:00, 23 など）
 
+### 構成図
+![Image](doc/architecture.drawio.png)
+
 ### 前提条件
 * tfstate用S3バケットが作成されていること
-* IAMユーザーが作成されていること
+* Terraform実行用IAMユーザーが作成されていること
+* Lambda実行用IAMロールが作成されていること
+* SlackとAWS Chatbotが連携済みであること
 
 ### デプロイ手順
 - AWSのプロファイルを設定する

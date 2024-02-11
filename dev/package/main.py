@@ -4,13 +4,6 @@ import boto3
 import pytz
 from slack_sdk import WebClient
 
-# 設定ファイルを読み込み
-#def load_config(query_file_path):
-#  with open(query_file_path, 'r') as yml:
-#    config = yaml.safe_load(yml)
-#  
-#  return config
-
 # インスタンスの情報取得
 def get_instances(ec2_client):
   response = ec2_client.describe_instances()
@@ -56,8 +49,6 @@ def post_slack_alert(token, channel, mention, message_text):
   result = client.chat_postMessage(channel, attachments)
 
 def lambda_handler(event, context):
-  # 設定ファイルを読み込む
-  #config = load_config("./config.yml")
 
   # 現在の時刻を取得する。
   current_time_hour_jst = datetime.now(pytz.timezone('Asia/Tokyo')).strftime("%H:%M").split(':')[0]
@@ -84,7 +75,7 @@ def lambda_handler(event, context):
       ec2_client.stop_instances(InstanceIds=[instance_id])
       stop_instances.append(instance_id + "(" + get_tag_value("Name", instance) + ")")
 
-  # 起動、停止した場合のみ通知
+  # 結果を出力
   message = "[" + ", ".join(start_instances) + "]が起動しました。[" + ", ".join(stop_instances) + "]が停止しました。"
   print(message)
 

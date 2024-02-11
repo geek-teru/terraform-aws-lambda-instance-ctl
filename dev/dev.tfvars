@@ -7,13 +7,13 @@ instance_ctl_lambda_vars = {
   handler          = "main.lambda_handler"
   runtime          = "python3.11"
   timeout_sec      = 60
-  role_arn         = "arn:aws:iam::775538353788:role/lambda-invoke-ec2-start-stop"
+  role_arn         = "arn:aws:iam::775538353788:role/lambda-instance-ctl"
 }
 
 # event bridge
 instance_ctl_cloudwatch_event_vars = {
   name        = "instance-ctl-schedule"
-  description = "Invoke lambda function that start and stop instances every hour", 
+  description = "Invoke lambda function every hour", 
   schedule_expression = "cron(0 * * * ? *)"
 }
 
@@ -27,7 +27,7 @@ instance_ctl_cloudwatch_logs_vars = {
 instance_ctl_cloudwatch_alarm_vars = {
   statistic           = "Maximum"
 
-  # 100分間(20datapoints)で、1回でも超えた場合、異常とみなす
+  # 100分間(20datapoints)で、1回でも閾値を超えた場合、異常とみなす
   evaluation_periods  = 20
   datapoints_to_alarm = 1  
 
